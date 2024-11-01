@@ -3,8 +3,44 @@
 {% block title %}Product List{% endblock %}
 
 {% block content %}
-    <h2>Product List</h2>
-    <div class="product-list">
-        <!-- Loop through and display products here -->
-    </div>
+    <h1>Product List</h1>
+
+    <!-- Category Filter Dropdown -->
+    <form method="get" action="{{ path('product_list') }}">
+        <label for="category">Filter by Category:</label>
+        <select name="category" id="category" onchange="this.form.submit()">
+            <option value="">All Categories</option>
+            {% for cat in categories %}
+                <option value="{{ cat.category }}" {% if selectedCategory == cat.category %}selected{% endif %}>
+                    {{ cat.category }}
+                </option>
+            {% endfor %}
+        </select>
+    </form>
+
+    <!-- Product Table -->
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Category</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.price | number_format(2) }} $</td>
+                <td>{{ product.category }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">No products found for this category.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
