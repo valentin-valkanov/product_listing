@@ -1,5 +1,3 @@
-
-# Product Listing Page
 # Product Listing Page
 
 ![PHP Version](https://img.shields.io/badge/PHP-8.2.12-brightgreen)
