@@ -25,20 +25,20 @@ class ProductRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findAllProductsOrderedByPrice(string $order = 'ASC'): array
+    public function findByCategoryAndOrder(string $category, string $order = 'ASC'): array
     {
         return $this->createQueryBuilder('p')
+            ->andWhere('p.category = :category')
+            ->setParameter('category', $category)
             ->orderBy('p.price', $order)
             ->getQuery()
             ->getResult();
     }
 
-    public function findByCategory(string $category, string $order = 'ASC'): array
+    public function findAllProductsOrderedByPrice(string $order = 'ASC'): array
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.category = :category')
-            ->setParameter('category', $category)
-            ->orderBy('p.price', $order) // Add ordering by price
+            ->orderBy('p.price', $order)
             ->getQuery()
             ->getResult();
     }

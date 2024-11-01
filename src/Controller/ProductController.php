@@ -19,18 +19,16 @@ class ProductController extends AbstractController
 
         // Fetch products based on the category and order
         if ($category) {
-            $products = $productRepository->findByCategory($category);
+            $products = $productRepository->findByCategoryAndOrder($category, $order);
         } else {
             $products = $productRepository->findAllProductsOrderedByPrice($order);
         }
 
-        $categories = $productRepository->findAllCategories();
-
         return $this->render('product_list.html.twig', [
             'products' => $products,
+            'categories' => $productRepository->findAllCategories(),
+            'selectedCategory' => $category,
             'currentOrder' => $order,
-            'categories' => $categories, // Pass categories to the template
-            'selectedCategory' => $category, // Pass the selected category to the template
         ]);
     }
 }

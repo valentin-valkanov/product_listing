@@ -16,7 +16,14 @@
                 </option>
             {% endfor %}
         </select>
+
+        <label for="order">Sort by Price:</label>
+        <select name="order" id="order" onchange="this.form.submit()">
+            <option value="ASC" {% if currentOrder == 'ASC' %}selected{% endif %}>Ascending</option>
+            <option value="DESC" {% if currentOrder == 'DESC' %}selected{% endif %}>Descending</option>
+        </select>
     </form>
+
 
     <!-- Product Table -->
     <table>
